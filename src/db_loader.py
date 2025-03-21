@@ -2,7 +2,6 @@ import sqlite3
 import polars as pl
 
 def load_data(parquet_path, db_path):
-    """Load data from Parquet file to SQLite database."""
     # Load parquet file
     df = pl.read_parquet(parquet_path)
     
@@ -10,7 +9,7 @@ def load_data(parquet_path, db_path):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     
-    # Create table with appropriate data types
+    # Create table with data types
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS movies (
         id TEXT PRIMARY KEY,

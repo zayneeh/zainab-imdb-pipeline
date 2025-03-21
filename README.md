@@ -1,7 +1,5 @@
 # zainab-imdb-pipeline
 
-# Damilola ETL Pipeline
-
 ## Overview
 This project implements an ETL (Extract, Transform, Load) pipeline to process movie data from the IMDB API (via RapidAPI). It efficiently extracts raw data, processes it for analysis, and stores it in a structured database format.
 ## Features
@@ -38,8 +36,8 @@ This is my table schema
 │   ├── config.py      # load env variable to python
 │   ├── utils.py      # general utility functions
 │── tests/
-│   ├── __init__.py     # Package initialization
-│   ├── test_web_scraper.py # Unit tests for extraction
+│   ├── __init__.py     
+│   ├── test_web_scraper.py # U
 │   ├── test_data_transform.py # Unit tests for transformation
 │   ├── test_db_loader.py    # Unit tests for loading
 │   ├── conftest.py    # Unit tests for loading

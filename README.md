@@ -1,86 +1,128 @@
-# zainab-imdb-pipeline
+# IMDB ETL Pipeline
 
-## Overview
-This project implements an ETL (Extract, Transform, Load) pipeline to process movie data from the IMDB API (via RapidAPI). It efficiently extracts raw data, processes it for analysis, and stores it in a structured database format.
-## Features
-- Extract: Fetch movie data from the IMDB API using RapidAPI.
-- Transform: Clean and transform the extracted data using `Polars` (or optionally Pandas) for efficient processing.
-- Database integration with `SQLAlchemy` and `psycopg2`
-- Configuration management using `.env` files
-- Unit testing with `pytest`
-   ```
-## Database table schema
-This is my table schema
+A data pipeline that extracts movie data from the IMDB API via RapidAPI, transforms it using Polars, and loads it into a PostgreSQL database.
 
-![API Documentation Screenshot](images/db-schema.png)
+## Project Overview
 
-## Project Structure
-```
-/etl_pipeline
-│── .env                # Environment variables
-│── .gitignore          # Git ignore file
-│── pyproject.toml      # Project dependencies and metadata
-│── poetry.lock         # Dependency lock file
-│── README.md           # Project documentation
-│── src/
-│   ├── __init__.py     # Package initialization
-│   ├── web_scraper.py      # Extraction logic
-│   ├── data_transform.py    # Data transformation logic
-│   ├── db_loader.py         # Load processed data into a database
-│   ├── model.py         # SQL alchemy model
-│── scripts/
-│   ├── __init__.py     # Package initialization
-│   ├── run_pipeline.py      # run etl pipeline logic
-│── utils/
-│   ├── __init__.py     # Package initialization
-│   ├── config.py      # load env variable to python
-│   ├── utils.py      # general utility functions
-│── tests/
-│   ├── __init__.py     
-│   ├── test_web_scraper.py # U
-│   ├── test_data_transform.py # Unit tests for transformation
-│   ├── test_db_loader.py    # Unit tests for loading
-│   ├── conftest.py    # Unit tests for loading
-```
-## Result
+This ETL (Extract, Transform, Load) pipeline fetches movie data from IMDB, processes it to create clean, structured datasets, and stores the results in a relational database. The pipeline follows software engineering best practices including automated testing, code formatting, type hinting, and dependency management with Poetry.
 
-![API Documentation Screenshot](images/db_result.png)
+
+![ERD Diagram](images/erd_diagram.png)
+
+
 
 ## Installation
-### Prerequisites
-- Python 3.13+
-- Poetry package manager
 
-### Steps
+### Prerequisites
+
+- Python 3.10+
+- Poetry
+- PostgreSQL 14+
+
+### Setup
+
 1. Clone the repository:
-   ```sh
-   git clone https://github.com/Zayneeh/zainab-etl-pipeline
-   cd etl_pipeline
-   ```
-2. Install dependencies:
-   ```sh
-   poetry install
-   ```
-3. Create a `.env` file based on `.env.example` and configure database settings.
+```bash
+git clone https://github.com/yourusername/firstname-etl-pipeline.git
+cd firstname-etl-pipeline
+```
+
+2. Install dependencies with Poetry:
+```bash
+poetry install
+```
+
+3. Set up environment variables:
+```bash
+cp .env.example .env
+# Edit .env file with your RapidAPI key and database credentials
+```
 
 ## Usage
-Run the ETL pipeline with:
-```sh
-python main.py
+
+### Running the Pipeline
+
+Execute the complete ETL pipeline:
+
+```bash
+poetry run python scripts/run_pipeline.py
 ```
 
-To run tests:
-```sh
-pytest
+### Individual Components
+
+Run components separately for development or debugging:
+
+```bash
+# Extract data only
+poetry run python -m src.web_scraper
+
+# Transform data only
+poetry run python -m src.data_transform
+
+# Load data only
+poetry run python -m src.db_loader
 ```
 
-## Dependencies
-- `polars` (>=1.25.2,<2.0.0)
-- `python-dotenv` (>=1.0.1,<2.0.0)
-- `sqlalchemy` (>=2.0.39,<3.0.0)
-- `psycopg2` (>=2.9.10,<3.0.0)
-- `pytest` (>=8.3.5,<9.0.0)
+### Running Tests
 
-## Author
-**Zainab Tairu**
+```bash
+poetry run pytest
+```
 
+## Data Flow
+
+1. **Extraction**:
+   - Connects to IMDB API via RapidAPI
+   - Fetches top 250 movies and detailed information
+   - Stores raw data in JSON format in `data/raw_data.json`
+
+2. **Transformation**:
+   - Loads raw JSON data into Polars DataFrames
+   - Cleans and normalizes data (dates, numeric values, text)
+   - Handles missing values and duplicates
+   - Creates relationship tables
+   - Stores processed data in Parquet format in `data/processed_data.parquet`
+
+3. **Loading**:
+   - Establishes connection to PostgreSQL database
+   - Creates tables if they don't exist
+   - Loads transformed data into respective tables
+   - Verifies data integrity
+
+
+### Project Structure
+
+```
+etl_pipeline/
+├── .gitignore
+├── README.md
+├── pyproject.toml
+├── poetry.lock
+├── src/
+│   ├── __init__.py
+│   ├── web_scraper.py
+│   ├── data_transform.py
+│   ├── db_loader.py
+├── tests/
+│   ├── __init__.py
+│   ├── test_scraper.py
+│   ├── test_transform.py
+│   ├── test_db_loader.py
+├── notebooks/
+│   └── exploration.ipynb
+├── data/
+│   ├── raw_data.json
+│   └── processed_data.parquet
+├── docs/
+│   └── erd_diagram.png
+└── scripts/
+    └── run_pipeline.py
+```
+
+## Demo
+
+[Link to Demo Video](not yet available)
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.

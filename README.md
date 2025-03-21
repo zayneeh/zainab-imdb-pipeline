@@ -7,7 +7,7 @@ A data pipeline that extracts movie data from the IMDB API via RapidAPI, transfo
 This ETL (Extract, Transform, Load) pipeline fetches movie data from IMDB, processes it to create clean, structured datasets, and stores the results in a relational database. The pipeline follows software engineering best practices including automated testing, code formatting, type hinting, and dependency management with Poetry.
 
 
-![ERD Diagram](./docs/erd_diagram.png)
+![ERD Diagram](images/erd_diagram.png)
 
 
 

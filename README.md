@@ -1,14 +1,12 @@
 # IMDB ETL Pipeline
 
-A data pipeline that extracts movie data from the IMDB API via RapidAPI, transforms it using Polars, and loads it into a PostgreSQL database.
+A data pipeline that extracts movie data from the IMDB API via RapidAPI, transforms it using Polars, and loads it into a a SQL database.
 
 ## Project Overview
 
 This ETL (Extract, Transform, Load) pipeline fetches movie data from IMDB, processes it to create clean, structured datasets, and stores the results in a relational database. The pipeline follows software engineering best practices including automated testing, code formatting, type hinting, and dependency management with Poetry.
 
-
 ![ERD Diagram](images/erd_diagram.png)
-
 
 
 ## Installation
@@ -17,7 +15,6 @@ This ETL (Extract, Transform, Load) pipeline fetches movie data from IMDB, proce
 
 - Python 3.10+
 - Poetry
-- PostgreSQL 14+
 
 ### Setup
 
@@ -84,7 +81,7 @@ poetry run pytest
    - Stores processed data in Parquet format in `data/processed_data.parquet`
 
 3. **Loading**:
-   - Establishes connection to PostgreSQL database
+   - Establishes connection to SQL database
    - Creates tables if they don't exist
    - Loads transformed data into respective tables
    - Verifies data integrity

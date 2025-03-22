@@ -23,8 +23,8 @@ This ETL (Extract, Transform, Load) pipeline fetches movie data from IMDB, proce
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/firstname-etl-pipeline.git
-cd firstname-etl-pipeline
+git clone https://github.com/Zayneeh/zainab-etl-pipeline.git
+cd zainab-etl-pipeline
 ```
 
 2. Install dependencies with Poetry:
@@ -123,14 +123,3 @@ etl_pipeline/
 
 <<<<<<< HEAD
 [Link to Demo Video](https://youtu.be/yourdemolink)
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-=======
-[Link to Demo Video](not yet available)
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
->>>>>>> bd883c6152680d771cad2e5ba826a40b40dd357e

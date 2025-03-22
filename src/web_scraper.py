@@ -19,9 +19,6 @@ def fetch_data():
         response.raise_for_status()
         data = response.json()
 
-        # Ensure the directory exists
-        os.makedirs("data", exist_ok=True)
-
         file_path = r"data/top250movies.csv"
         with open(file_path, 'w', newline='', encoding='utf-8') as csv_file:
             writer = csv.DictWriter(csv_file, fieldnames=data[0].keys())

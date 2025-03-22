@@ -3,7 +3,6 @@ import polars as pl
 def clean_data(file_path: str) -> pl.DataFrame:
     # Load data
     df = pl.read_csv(file_path)
-    
     # Clean text columns
     text_columns = ["id", "primaryTitle", "originalTitle", "description", 
                    "productionCompanies", "filmingLocations"]
@@ -20,12 +19,15 @@ def clean_data(file_path: str) -> pl.DataFrame:
     if num_cols:
         df = df.with_columns([pl.col(col).cast(pl.Float64, strict=False) for col in num_cols])
     
-    # Parse date column 
+    #parse date 
     if "releaseDate" in df.columns:
         try:
-            df = df.with_column(pl.col("releaseDate").str.to_date("%Y-%m-%d", strict=False))
-        except:
-            pass  
+            df = df.with_columns(pl.col("releaseDate").str.to_date("%Y-%m-%d", strict=False))
+        except Exception as e:
+            print(f"Error parsing releaseDate: {e}")
+            # If parsing fails, keep the column as a string
+            df = df.with_columns(pl.col("releaseDate").cast(pl.Utf8))
+            
     # Remove duplicates with id
     if "id" in df.columns:
         df = df.unique(subset=["id"], keep="first")

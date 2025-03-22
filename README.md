@@ -121,8 +121,16 @@ etl_pipeline/
 
 ## Demo
 
+<<<<<<< HEAD
 [Link to Demo Video](https://youtu.be/yourdemolink)
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+=======
+[Link to Demo Video](not yet available)
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+>>>>>>> bd883c6152680d771cad2e5ba826a40b40dd357e
